@@ -670,8 +670,8 @@ function Index() {
             <div className="grid gap-6 lg:grid-cols-12">
               <SectionKicker tone="lg:col-span-3">Cercle 2 · Les conseillers</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Des forces d'orientation,<br /><em className="text-forest">pas des supérieurs.</em></h2>
-                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Autour du système, pas au-dessus : les conseillers apportent le recul, l'expertise et l'orientation. Chacun peut intervenir sur plusieurs fonctions.</p>
+                <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Des forces d'orientation<br /><em className="text-forest">et d'amplification.</em></h2>
+                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Autour du système, les conseillers apportent le recul, l'expertise et l'orientation — et amplifient chaque action de l'équipe. Chacun peut intervenir sur plusieurs fonctions.</p>
               </div>
             </div>
             <div className="mt-12 grid gap-px bg-line md:grid-cols-3">
