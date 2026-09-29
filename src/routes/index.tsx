@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowDown, ArrowRight, ArrowUpRight, Plus, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, Sparkles } from "lucide-react";
 import universeImage from "@/assets/africafun-deux-univers.jpeg.asset.json";
 import zemzemImage from "@/assets/sam-zemidjan.jpg";
-import tresorsImage from "@/assets/abomey-tresors.jpg";
+import tresorsStatues from "@/assets/tresors-statues.jpg.asset.json";
+import tresorsPorte from "@/assets/tresors-porte.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -204,32 +205,12 @@ const agents = [
   },
 ];
 
-const horizons = {
-  build: ["Équipe", "Conseillers", "Agents IA", "Outils", "Workflows", "Bases documentaires", "Processus de production"],
-  measure: ["Temps de production", "Qualité", "Coûts", "Outils", "Workflows", "Performances", "Réactions du public"],
-  portfolio: ["Premières œuvres", "Premiers formats", "Premières démonstrations", "Premiers cas d'usage", "Première identité de production", "Premiers résultats mesurables"],
-  yearly: [
-    "Développer un portfolio identifiable",
-    "Produire plusieurs projets forts",
-    "Construire une signature créative",
-    "Développer une communauté",
-    "Démontrer des méthodes de production IA efficaces",
-    "Développer des collaborations",
-    "Obtenir de premiers clients / partenaires selon le modèle économique choisi",
-    "Documenter les workflows",
-    "Renforcer la crédibilité de AAA",
-    "Installer progressivement la marque",
-  ],
-};
-
 const timeline = [
-  ["0", "Lancement"],
-  ["Mois 1", "Construire"],
-  ["Mois 2", "Produire"],
-  ["Mois 3", "Apprendre"],
-  ["Mois 4–6", "Développer"],
-  ["Mois 7–9", "Accélérer"],
-  ["Mois 10–12", "Installer"],
+  ["Jours 1–30", "Assembler", "Équipe, outils et méthodes"],
+  ["Jours 31–60", "Produire", "Premiers contenus Zemzem et Les Trésors"],
+  ["Jours 61–90", "Apprendre", "Mesurer, ajuster et formaliser"],
+  ["Mois 4–6", "Affirmer", "Portfolio, signature et communauté"],
+  ["Mois 7–9", "Devenir la référence", "Projets forts, collaborations et crédibilité"],
 ] as const;
 
 // ---------- Constellation ----------
@@ -327,8 +308,8 @@ function Constellation() {
         <div className="grid gap-6 lg:grid-cols-12">
           <SectionKicker tone="text-sky lg:col-span-3">Architecture collaborative</SectionKicker>
           <div className="lg:col-span-9">
-            <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">Personne ne travaille seul.<br /><em className="text-sun">Un système, pas une pyramide.</em></h2>
-            <p className="mt-6 max-w-2xl leading-relaxed text-cream/70">Une constellation, pas un organigramme. Une même personne se relie à plusieurs intelligences, un agent sert plusieurs personnes, un conseiller éclaire plusieurs fonctions. Survolez la constellation, puis cliquez sur un élément pour ouvrir sa fiche.</p>
+            <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">Chaque force se relie.<br /><em className="text-sun">La création circule.</em></h2>
+            <p className="mt-6 max-w-2xl leading-relaxed text-cream/70">Une constellation vivante : chaque personne se relie à plusieurs intelligences, chaque agent sert plusieurs talents et chaque conseiller collabore avec plusieurs fonctions. Survolez la constellation, puis cliquez sur un élément pour ouvrir sa fiche.</p>
           </div>
         </div>
 
@@ -478,7 +459,7 @@ function Constellation() {
                   {activeConnected.length > 0 && (
                     <div className="mt-6">
                       <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-cream/60">
-                        {active.kind === "agent" ? "Utilisée par" : active.kind === "advisor" ? "Éclaire" : "Intelligences reliées"}
+                        {active.kind === "agent" ? "Utilisée par" : active.kind === "advisor" ? "Collabore avec" : "Intelligences reliées"}
                       </p>
                       <div className="mt-3 flex flex-wrap gap-2">
                         {activeConnected.map((n) => (
@@ -502,83 +483,46 @@ function Constellation() {
 
 // ---------- Agent fiche ----------
 
-function AgentFiche({ agent }: { agent: (typeof agents)[number] }) {
-  const [open, setOpen] = useState(false);
+function AgentExplorer() {
+  const [activeId, setActiveId] = useState(agents[0].id);
+  const agent = agents.find((item) => item.id === activeId) ?? agents[0];
   return (
-    <article className={`flex flex-col border-l-4 bg-canvas p-6 shadow-soft transition-colors ${open ? "border-forest" : "border-line"}`}>
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <span className="font-display text-3xl text-forest">{agent.number}</span>
-          <h3 className="mt-2 font-display text-2xl leading-tight">{agent.name}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-navy/70">{agent.mission}</p>
-        </div>
-        <div className="text-right">
-          <p className="bg-sun-soft px-2 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-navy">Enveloppe</p>
-          <p className="mt-1 text-xs font-bold text-forest">{agent.budget}</p>
-        </div>
+    <div className="mt-12 grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)]">
+      <div className="grid grid-cols-2 gap-px bg-cream/15 sm:grid-cols-4 lg:grid-cols-2">
+        {agents.map((item) => (
+          <button key={item.id} type="button" onClick={() => setActiveId(item.id)} aria-pressed={item.id === agent.id} className={`group min-h-28 p-4 text-left transition-colors ${item.id === agent.id ? "bg-sun text-navy" : "bg-blue-glow text-cream hover:bg-forest"}`}>
+            <span className={`font-display text-2xl ${item.id === agent.id ? "text-red" : "text-sky"}`}>{item.number}</span>
+            <span className="mt-3 block text-sm font-semibold leading-snug">{item.name}</span>
+          </button>
+        ))}
       </div>
-
-      <div className="mt-5 flex flex-wrap gap-2">
-        {agent.tools.slice(0, 3).map(([t]) => <span key={t} className="border border-line px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-navy/60">{t}</span>)}
-        {agent.tools.length > 3 && <span className="border border-line px-2 py-1 text-[10px] font-semibold text-navy/60">+{agent.tools.length - 3}</span>}
-      </div>
-
-      <button onClick={() => setOpen((v) => !v)} className="mt-5 flex items-center gap-2 self-start border-b border-forest pb-1 text-xs font-bold uppercase tracking-[0.14em] text-forest transition-colors hover:text-navy" aria-expanded={open}>
-        {open ? "Replier la fiche" : "Fiche économique complète"} <ArrowDown size={14} className={`transition-transform ${open ? "rotate-180" : ""}`} />
-      </button>
-
-      {open && (
-        <div className="mt-6 grid gap-6 border-t border-line pt-6 text-sm">
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Responsabilités</p>
-            <ul className="mt-2 grid gap-1.5">
-              {agent.duties.map((d) => <li key={d} className="flex items-start gap-2 text-navy/75"><span className="mt-1.5 size-1.5 shrink-0 bg-forest" />{d}</li>)}
-            </ul>
+      <article key={agent.id} className="animate-fade-in bg-paper p-6 text-navy shadow-soft sm:p-8">
+        <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-4 border-b border-line pb-6">
+          <div className="min-w-0">
+            <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-forest">Intelligence {agent.number}</p>
+            <h3 className="mt-2 font-display text-3xl leading-tight md:text-4xl">{agent.name}</h3>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-navy/70">{agent.mission}</p>
           </div>
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Utilisation dans AAA</p>
-            <p className="mt-2 text-navy/75"><strong className="text-navy">Qui :</strong> {agent.usageWho}</p>
-            <p className="mt-1 text-navy/75"><strong className="text-navy">Étapes :</strong> {agent.usageSteps}</p>
-          </div>
-          <div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Outils possibles</p>
-            <div className="mt-2 grid gap-2">
-              {agent.tools.map(([t, d]) => <div key={t} className="flex flex-wrap items-baseline gap-x-2"><strong className="text-navy">{t}</strong><span className="text-navy/60 text-xs">{d}</span></div>)}
-            </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Outil principal recommandé</p>
-              <p className="mt-2 inline-block bg-forest px-3 py-1.5 text-xs font-bold text-cream">{agent.mainTool}</p>
-            </div>
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Alternatives</p>
-              <p className="mt-2 text-xs leading-relaxed text-navy/70">{agent.alternatives.join(" · ")}</p>
-            </div>
-          </div>
-          <div className="border border-line bg-paper p-4">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Enveloppe mensuelle estimative</p>
-                <p className="mt-1.5 font-display text-2xl text-forest">{agent.budget}</p>
-              </div>
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">Nature du coût</p>
-                <p className="mt-1.5 text-xs leading-relaxed text-navy/70">{agent.nature}</p>
-              </div>
-            </div>
-            {agent.videoEnvelope && (
-              <div className="mt-4 border-t border-sun bg-sun-soft/60 p-4">
-                <p className="font-display text-lg font-bold uppercase tracking-[0.06em] text-red">Enveloppe de production vidéo</p>
-                <p className="mt-2 text-xs leading-relaxed text-navy/75">Ce n'est pas un « abonnement Producteur Vidéo IA ». Le coût dépend fortement du nombre de vidéos, de leur durée, du modèle, du nombre de générations, des variantes, des itérations et de la résolution.</p>
-              </div>
-            )}
-            <p className="mt-4 border-t border-line pt-3 text-xs leading-relaxed text-navy/75"><strong className="text-navy">Partage possible :</strong> {agent.sharing}</p>
-            {agent.disclaimer && <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.08em] text-navy/45">{agent.disclaimer}</p>}
+          <div className="shrink-0 text-right">
+            <p className="text-[9px] font-bold uppercase tracking-[0.12em] text-navy/45">Enveloppe</p>
+            <p className="mt-1 font-display text-lg text-forest sm:text-xl">{agent.budget}</p>
           </div>
         </div>
-      )}
-    </article>
+        <div className="mt-6 grid gap-7 sm:grid-cols-2">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Responsabilités</p>
+            <ul className="mt-3 grid gap-2">{agent.duties.map((d) => <li key={d} className="flex items-start gap-2 text-sm text-navy/75"><span className="mt-2 size-1.5 shrink-0 bg-forest" />{d}</li>)}</ul>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/45">Dans le studio</p>
+            <p className="mt-3 text-sm leading-relaxed text-navy/75">{agent.usageWho}</p>
+            <p className="mt-3 font-display text-lg text-forest">{agent.usageSteps}</p>
+          </div>
+        </div>
+        <div className="mt-6 flex flex-wrap gap-2">{agent.tools.map(([tool]) => <span key={tool} className="border border-line bg-canvas px-2.5 py-1.5 text-[10px] font-semibold uppercase text-navy/65">{tool}</span>)}</div>
+        <p className="mt-6 border-t border-line pt-4 text-xs leading-relaxed text-navy/65">{agent.sharing}</p>
+      </article>
+    </div>
   );
 }
 
@@ -606,7 +550,7 @@ function Index() {
       <main id="top">
         {/* HERO */}
         <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-navy text-cream">
-          <img src={universeImage.url} alt="Les univers Zemzem et Les Trésors réunis entre Cotonou et un musée futuriste" className="absolute inset-0 size-full object-cover" />
+          <img src={universeImage.url} alt="Les univers Zemzem et Les Trésors réunis entre Cotonou et un musée futuriste" className="absolute inset-0 size-full object-cover object-[58%_center] sm:object-center" />
           <div className="absolute inset-0 bg-hero-overlay" />
           <div className="relative mx-auto grid w-full max-w-7xl gap-10 px-5 pb-12 pt-36 sm:px-8 md:pb-16 lg:grid-cols-12 lg:px-10">
             <div className="lg:col-span-9">
@@ -614,13 +558,6 @@ function Index() {
               <h1 className="font-display text-[clamp(2.9rem,7vw,7rem)] leading-[0.9]">Africafun<br /><em className="font-medium text-sun">AI Agency</em></h1>
               <p className="mt-6 max-w-3xl text-lg leading-relaxed text-cream/85 md:text-xl">Une agence créative augmentée par l'intelligence artificielle.</p>
               <p className="mt-3 max-w-3xl text-sm leading-relaxed text-cream/70 md:text-base">Une équipe humaine, des conseillers et des intelligences spécialisées collaborent pour transformer des idées en univers, en œuvres, en communautés et en projets culturels.</p>
-
-              <div className="mt-9 flex flex-wrap items-end gap-x-5 gap-y-3">
-                <div className="flex items-center font-display text-5xl text-sun md:text-6xl">
-                  <span>3</span><Plus className="mx-2 text-cream/60" size={26} /><span>3</span><Plus className="mx-2 text-cream/60" size={26} /><span>8</span>
-                </div>
-                <p className="max-w-xs text-[11px] font-semibold uppercase tracking-[0.16em] text-cream/70">3 talents opérationnels · 3 conseillers · 8 intelligences IA</p>
-              </div>
 
               <p className="mt-8 font-display text-xl uppercase leading-snug tracking-[0.08em] text-cream md:text-2xl">Une équipe.<br />Une intelligence collective.<br /><span className="text-sun">Une agence.</span></p>
             </div>
@@ -644,7 +581,7 @@ function Index() {
               <SectionKicker tone="lg:col-span-3">Cercle 1 · Les talents</SectionKicker>
               <div className="lg:col-span-9">
                 <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Les humains donnent<br /><em className="text-forest">la direction.</em></h2>
-                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Trois talents opérationnels prennent les décisions et portent la responsabilité. Chacun commande plusieurs intelligences — jamais l'inverse.</p>
+                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Trois talents opérationnels prennent les décisions, portent la responsabilité et dirigent plusieurs intelligences au service de leur vision.</p>
               </div>
             </div>
             <div className="mt-12 grid gap-5 md:grid-cols-3">
@@ -696,13 +633,11 @@ function Index() {
             <div className="grid gap-6 lg:grid-cols-12">
               <SectionKicker tone="text-sky lg:col-span-3">Cercle 3 · Infrastructure créative</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-none md:text-7xl">Huit intelligences spécialisées.<br /><em className="text-sky">Huit fiches économiques.</em></h2>
-                <p className="mt-6 max-w-2xl text-cream/70">Chaque agent est une fonction au service de l'équipe — avec sa mission, ses outils, son enveloppe et ses mutualisations. Aucun abonnement n'est lié à un agent : les outils alimentent plusieurs intelligences.</p>
+                <h2 className="font-display text-5xl leading-none md:text-7xl">Huit intelligences.<br /><em className="text-sky">Une force orchestrée.</em></h2>
+                <p className="mt-6 max-w-2xl text-cream/70">Choisissez une intelligence pour découvrir sa mission, ses usages, ses outils et son enveloppe. Chaque outil alimente plusieurs fonctions du studio.</p>
               </div>
             </div>
-            <div className="mt-14 grid gap-5 md:grid-cols-2">
-              {agents.map((agent) => <AgentFiche key={agent.id} agent={agent} />)}
-            </div>
+            <AgentExplorer />
           </div>
         </section>
 
@@ -750,7 +685,7 @@ function Index() {
               <div className="mx-auto h-8 w-px bg-line" />
               <div className="bg-forest px-8 py-5 text-center text-cream">
                 <p className="font-display text-2xl font-bold">8 AGENTS IA</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-cream/70">Une même source sert plusieurs intelligences — pas 8 abonnements</p>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-cream/70">Une même source nourrit plusieurs intelligences</p>
               </div>
             </div>
           </div>
@@ -762,67 +697,41 @@ function Index() {
             <div className="grid gap-6 lg:grid-cols-12">
               <SectionKicker tone="lg:col-span-3">Deux horizons distincts</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">Trois mois pour construire la machine.<br /><em className="text-forest">Douze mois pour construire la référence.</em></h2>
+                <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">90 jours pour construire la machine.<br /><em className="text-forest">9 mois pour construire la référence.</em></h2>
               </div>
             </div>
 
-            <div className="mt-14 grid gap-5 lg:grid-cols-2">
-              {/* Horizon 01 */}
-              <article className="border-t-4 border-red bg-paper p-8 shadow-soft lg:p-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red">Horizon 01 · 90 jours</p>
-                <h3 className="mt-4 font-display text-4xl leading-tight">Construire, tester, apprendre</h3>
-                <p className="mt-4 text-sm leading-relaxed text-navy/70">L'objectif n'est pas encore de devenir une agence de référence. Il est de construire la machine capable de le devenir.</p>
-                <div className="mt-8 grid gap-5">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">1 · Construire</p>
-                    <div className="mt-2 flex flex-wrap gap-2">{horizons.build.map((x) => <span key={x} className="border border-line bg-canvas px-2 py-1 text-[11px] text-navy/70">{x}</span>)}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">2 · Expérimenter</p>
-                    <p className="mt-2 text-sm text-navy/75">Produire les premiers contenus et prototypes autour des univers <strong>Zemzem</strong> et <strong>Les Trésors</strong>.</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">3 · Apprendre</p>
-                    <div className="mt-2 flex flex-wrap gap-2">{horizons.measure.map((x) => <span key={x} className="border border-line bg-canvas px-2 py-1 text-[11px] text-navy/70">{x}</span>)}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">4 · Construire un premier portfolio</p>
-                    <div className="mt-2 flex flex-wrap gap-2">{horizons.portfolio.map((x) => <span key={x} className="border border-line bg-canvas px-2 py-1 text-[11px] text-navy/70">{x}</span>)}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">5 · Trouver le modèle de production</p>
-                    <p className="mt-2 text-sm text-navy/75">Identifier les workflows qui fonctionnent réellement.</p>
-                  </div>
+            <div className="mt-14 overflow-hidden border border-line bg-paper shadow-soft">
+              <div className="grid md:grid-cols-[1fr_3fr]">
+                <div className="bg-red p-7 text-cream md:p-9">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cream/70">La machine</p>
+                  <p className="mt-2 font-display text-6xl">90</p>
+                  <p className="font-display text-2xl">jours</p>
                 </div>
-                <blockquote className="mt-8 border-l-4 border-sun pl-5 font-display text-lg italic leading-relaxed text-navy">« Les 90 premiers jours ne servent pas à prouver que nous sommes déjà une agence de référence. Ils servent à construire la machine capable de le devenir. »</blockquote>
-              </article>
-
-              {/* Horizon 02 */}
-              <article className="border-t-4 border-forest bg-navy p-8 text-cream shadow-soft lg:p-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-sun">Horizon 02 · 12 mois</p>
-                <h3 className="mt-4 font-display text-4xl leading-tight">Installer AAA comme une agence de référence</h3>
-                <p className="mt-4 text-sm leading-relaxed text-cream/70">Positionner AAA comme une agence reconnue pour sa capacité à combiner :</p>
-                <p className="mt-4 flex flex-wrap gap-x-2 gap-y-1 font-display text-lg text-sun">Création + Culture + Technologie + IA + Production + Communautés</p>
-                <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.14em] text-cream/50">Objectifs à 12 mois</p>
-                <ul className="mt-3 grid gap-2.5">
-                  {horizons.yearly.map((x) => <li key={x} className="flex items-start gap-3 text-sm leading-relaxed text-cream/80"><span className="mt-2 size-1.5 shrink-0 bg-sun" />{x}</li>)}
-                </ul>
-              </article>
-            </div>
-
-            {/* Timeline */}
-            <div className="timeline-scroll mt-16 overflow-x-auto pb-4">
-              <div className="min-w-[980px]">
-                <div className="grid grid-cols-12 border-x border-t border-line">
-                  <div className="col-span-7 bg-sun-soft px-5 py-4 text-center"><p className="font-display text-2xl font-bold text-red">90 JOURS</p><p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-navy/60">Construire la machine</p></div>
-                  <div className="col-span-5 bg-paper px-5 py-4 text-center"><p className="font-display text-2xl font-bold text-forest">12 MOIS</p><p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-navy/60">Construire la référence</p></div>
+                <div className="grid sm:grid-cols-3">
+                  {timeline.slice(0, 3).map(([period, title, detail], index) => (
+                    <article key={period} className="group border-b border-line p-6 transition-colors hover:bg-sun-soft sm:border-b-0 sm:border-r sm:last:border-r-0">
+                      <span className="text-xs font-bold text-red">0{index + 1}</span>
+                      <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-navy/45">{period}</p>
+                      <h3 className="mt-2 font-display text-2xl group-hover:text-red">{title}</h3>
+                      <p className="mt-3 text-xs leading-relaxed text-navy/65">{detail}</p>
+                    </article>
+                  ))}
                 </div>
-                <div className="grid grid-cols-7 border-b border-line">
-                  {timeline.map(([month, title], i) => (
-                    <article key={month} className={`relative px-3 pb-6 pt-7 text-center ${i < 4 ? "bg-sun-soft" : "bg-paper"} border-r border-line last:border-r-0`}>
-                      <span className={`absolute -top-1.5 left-1/2 size-3 -translate-x-1/2 rounded-full border-[3px] border-canvas ${i < 4 ? "bg-red" : "bg-forest"}`} />
-                      <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-navy/45">{month}</p>
-                      <h4 className="mt-2 font-display text-lg md:text-xl">{title}</h4>
+              </div>
+              <div className="grid border-t border-line md:grid-cols-[1fr_3fr]">
+                <div className="bg-forest p-7 text-cream md:p-9">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cream/70">La référence</p>
+                  <p className="mt-2 font-display text-6xl text-sun">9</p>
+                  <p className="font-display text-2xl">mois</p>
+                </div>
+                <div className="grid sm:grid-cols-2">
+                  {timeline.slice(3).map(([period, title, detail], index) => (
+                    <article key={period} className="group p-6 transition-colors hover:bg-sun-soft sm:border-r sm:last:border-r-0 md:p-9">
+                      <span className="text-xs font-bold text-forest">0{index + 4}</span>
+                      <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-navy/45">{period}</p>
+                      <h3 className="mt-2 font-display text-2xl group-hover:text-forest md:text-3xl">{title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-navy/65">{detail}</p>
                     </article>
                   ))}
                 </div>
@@ -838,7 +747,7 @@ function Index() {
               <SectionKicker tone="lg:col-span-3">Mission culturelle</SectionKicker>
               <div className="lg:col-span-9">
                 <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Chaque projet est une nouvelle façon<br /><em className="text-forest">d'explorer le Bénin.</em></h2>
-                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Les projets d'AAA ne sont pas seulement des productions. Ils constituent différentes portes d'entrée vers le Bénin.</p>
+                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Les projets d'AAA sont des productions et des portes d'entrée complémentaires vers le Bénin.</p>
               </div>
             </div>
 
@@ -860,7 +769,10 @@ function Index() {
 
               {/* Les Trésors */}
               <article className="group relative min-h-[640px] overflow-hidden bg-navy">
-                <img src={tresorsImage} alt="Les trésors royaux d'Abomey s'éveillent dans un musée futuriste" className="absolute inset-0 size-full object-cover object-right transition-transform duration-700 group-hover:scale-[1.025]" />
+                <div className="absolute inset-0 grid grid-cols-[1.4fr_0.8fr] gap-1 bg-navy">
+                  <img src={tresorsStatues.url} alt="Trois statues royales historiques exposées au musée" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+                  <img src={tresorsPorte.url} alt="Porte royale sculptée du royaume du Dahomey" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+                </div>
                 <div className="absolute inset-0 bg-card-overlay" />
                 <div className="absolute inset-x-0 bottom-0 p-7 text-cream md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on découvre · Aventure · Histoire · Science-fiction</p>
@@ -898,7 +810,7 @@ function Index() {
         <section className="bg-navy py-24 text-cream lg:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
             <SectionKicker tone="text-sun">Message global</SectionKicker>
-            <h2 className="mt-8 max-w-5xl font-display text-4xl leading-[1.05] md:text-6xl">Nous ne produisons pas seulement des contenus.<br /><em className="text-sun">Nous construisons des façons de regarder.</em></h2>
+            <h2 className="mt-8 max-w-5xl font-display text-4xl leading-[1.05] md:text-6xl">Nous produisons des contenus qui ouvrent le regard.<br /><em className="text-sun">Nous construisons des façons de regarder.</em></h2>
             <div className="mt-12 grid gap-px bg-cream/15 sm:grid-cols-2 lg:grid-cols-3">
               {["Regarder le quotidien", "Comprendre l'histoire", "Découvrir les savoirs", "Explorer les cultures", "Créer de nouveaux imaginaires", "Partager avec le monde"].map((x, i) => (
                 <p key={x} className="bg-blue-glow p-6 font-display text-xl leading-snug md:text-2xl"><span className="mr-3 text-xs font-bold text-sky">0{i + 1}</span>{x}</p>
@@ -922,9 +834,6 @@ function Index() {
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-navy/70">Une petite équipe. Une grande capacité de création. Transformer une idée en univers, un univers en œuvres et des œuvres en communautés.</p>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-end lg:col-span-3 lg:justify-end">
-                <a href="mailto:sb@afrikafun.com" className="inline-flex items-center gap-3 bg-navy px-6 py-4 font-semibold text-cream transition-transform hover:-translate-y-1">Entrer en conversation <ArrowUpRight size={18} /></a>
               </div>
             </div>
           </div>
