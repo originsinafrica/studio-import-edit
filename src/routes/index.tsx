@@ -685,7 +685,7 @@ function Index() {
               <div className="mx-auto h-8 w-px bg-line" />
               <div className="bg-forest px-8 py-5 text-center text-cream">
                 <p className="font-display text-2xl font-bold">8 AGENTS IA</p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-cream/70">Une même source sert plusieurs intelligences — pas 8 abonnements</p>
+                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-cream/70">Une même source nourrit plusieurs intelligences</p>
               </div>
             </div>
           </div>
@@ -697,67 +697,41 @@ function Index() {
             <div className="grid gap-6 lg:grid-cols-12">
               <SectionKicker tone="lg:col-span-3">Deux horizons distincts</SectionKicker>
               <div className="lg:col-span-9">
-                <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">Trois mois pour construire la machine.<br /><em className="text-forest">Douze mois pour construire la référence.</em></h2>
+                <h2 className="font-display text-5xl leading-[0.95] md:text-7xl">90 jours pour construire la machine.<br /><em className="text-forest">9 mois pour construire la référence.</em></h2>
               </div>
             </div>
 
-            <div className="mt-14 grid gap-5 lg:grid-cols-2">
-              {/* Horizon 01 */}
-              <article className="border-t-4 border-red bg-paper p-8 shadow-soft lg:p-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-red">Horizon 01 · 90 jours</p>
-                <h3 className="mt-4 font-display text-4xl leading-tight">Construire, tester, apprendre</h3>
-                <p className="mt-4 text-sm leading-relaxed text-navy/70">L'objectif n'est pas encore de devenir une agence de référence. Il est de construire la machine capable de le devenir.</p>
-                <div className="mt-8 grid gap-5">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">1 · Construire</p>
-                    <div className="mt-2 flex flex-wrap gap-2">{horizons.build.map((x) => <span key={x} className="border border-line bg-canvas px-2 py-1 text-[11px] text-navy/70">{x}</span>)}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">2 · Expérimenter</p>
-                    <p className="mt-2 text-sm text-navy/75">Produire les premiers contenus et prototypes autour des univers <strong>Zemzem</strong> et <strong>Les Trésors</strong>.</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">3 · Apprendre</p>
-                    <div className="mt-2 flex flex-wrap gap-2">{horizons.measure.map((x) => <span key={x} className="border border-line bg-canvas px-2 py-1 text-[11px] text-navy/70">{x}</span>)}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">4 · Construire un premier portfolio</p>
-                    <div className="mt-2 flex flex-wrap gap-2">{horizons.portfolio.map((x) => <span key={x} className="border border-line bg-canvas px-2 py-1 text-[11px] text-navy/70">{x}</span>)}</div>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-navy/50">5 · Trouver le modèle de production</p>
-                    <p className="mt-2 text-sm text-navy/75">Identifier les workflows qui fonctionnent réellement.</p>
-                  </div>
+            <div className="mt-14 overflow-hidden border border-line bg-paper shadow-soft">
+              <div className="grid md:grid-cols-[1fr_3fr]">
+                <div className="bg-red p-7 text-cream md:p-9">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cream/70">La machine</p>
+                  <p className="mt-2 font-display text-6xl">90</p>
+                  <p className="font-display text-2xl">jours</p>
                 </div>
-                <blockquote className="mt-8 border-l-4 border-sun pl-5 font-display text-lg italic leading-relaxed text-navy">« Les 90 premiers jours ne servent pas à prouver que nous sommes déjà une agence de référence. Ils servent à construire la machine capable de le devenir. »</blockquote>
-              </article>
-
-              {/* Horizon 02 */}
-              <article className="border-t-4 border-forest bg-navy p-8 text-cream shadow-soft lg:p-10">
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-sun">Horizon 02 · 12 mois</p>
-                <h3 className="mt-4 font-display text-4xl leading-tight">Installer AAA comme une agence de référence</h3>
-                <p className="mt-4 text-sm leading-relaxed text-cream/70">Positionner AAA comme une agence reconnue pour sa capacité à combiner :</p>
-                <p className="mt-4 flex flex-wrap gap-x-2 gap-y-1 font-display text-lg text-sun">Création + Culture + Technologie + IA + Production + Communautés</p>
-                <p className="mt-8 text-[10px] font-bold uppercase tracking-[0.14em] text-cream/50">Objectifs à 12 mois</p>
-                <ul className="mt-3 grid gap-2.5">
-                  {horizons.yearly.map((x) => <li key={x} className="flex items-start gap-3 text-sm leading-relaxed text-cream/80"><span className="mt-2 size-1.5 shrink-0 bg-sun" />{x}</li>)}
-                </ul>
-              </article>
-            </div>
-
-            {/* Timeline */}
-            <div className="timeline-scroll mt-16 overflow-x-auto pb-4">
-              <div className="min-w-[980px]">
-                <div className="grid grid-cols-12 border-x border-t border-line">
-                  <div className="col-span-7 bg-sun-soft px-5 py-4 text-center"><p className="font-display text-2xl font-bold text-red">90 JOURS</p><p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-navy/60">Construire la machine</p></div>
-                  <div className="col-span-5 bg-paper px-5 py-4 text-center"><p className="font-display text-2xl font-bold text-forest">12 MOIS</p><p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-navy/60">Construire la référence</p></div>
+                <div className="grid sm:grid-cols-3">
+                  {timeline.slice(0, 3).map(([period, title, detail], index) => (
+                    <article key={period} className="group border-b border-line p-6 transition-colors hover:bg-sun-soft sm:border-b-0 sm:border-r sm:last:border-r-0">
+                      <span className="text-xs font-bold text-red">0{index + 1}</span>
+                      <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-navy/45">{period}</p>
+                      <h3 className="mt-2 font-display text-2xl group-hover:text-red">{title}</h3>
+                      <p className="mt-3 text-xs leading-relaxed text-navy/65">{detail}</p>
+                    </article>
+                  ))}
                 </div>
-                <div className="grid grid-cols-7 border-b border-line">
-                  {timeline.map(([month, title], i) => (
-                    <article key={month} className={`relative px-3 pb-6 pt-7 text-center ${i < 4 ? "bg-sun-soft" : "bg-paper"} border-r border-line last:border-r-0`}>
-                      <span className={`absolute -top-1.5 left-1/2 size-3 -translate-x-1/2 rounded-full border-[3px] border-canvas ${i < 4 ? "bg-red" : "bg-forest"}`} />
-                      <p className="text-[9px] font-bold uppercase tracking-[0.14em] text-navy/45">{month}</p>
-                      <h4 className="mt-2 font-display text-lg md:text-xl">{title}</h4>
+              </div>
+              <div className="grid border-t border-line md:grid-cols-[1fr_3fr]">
+                <div className="bg-forest p-7 text-cream md:p-9">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cream/70">La référence</p>
+                  <p className="mt-2 font-display text-6xl text-sun">9</p>
+                  <p className="font-display text-2xl">mois</p>
+                </div>
+                <div className="grid sm:grid-cols-2">
+                  {timeline.slice(3).map(([period, title, detail], index) => (
+                    <article key={period} className="group p-6 transition-colors hover:bg-sun-soft sm:border-r sm:last:border-r-0 md:p-9">
+                      <span className="text-xs font-bold text-forest">0{index + 4}</span>
+                      <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.12em] text-navy/45">{period}</p>
+                      <h3 className="mt-2 font-display text-2xl group-hover:text-forest md:text-3xl">{title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-navy/65">{detail}</p>
                     </article>
                   ))}
                 </div>
@@ -773,7 +747,7 @@ function Index() {
               <SectionKicker tone="lg:col-span-3">Mission culturelle</SectionKicker>
               <div className="lg:col-span-9">
                 <h2 className="font-display text-5xl leading-[0.95] md:text-6xl">Chaque projet est une nouvelle façon<br /><em className="text-forest">d'explorer le Bénin.</em></h2>
-                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Les projets d'AAA ne sont pas seulement des productions. Ils constituent différentes portes d'entrée vers le Bénin.</p>
+                <p className="mt-5 max-w-2xl leading-relaxed text-navy/65">Les projets d'AAA sont des productions et des portes d'entrée complémentaires vers le Bénin.</p>
               </div>
             </div>
 
@@ -795,7 +769,10 @@ function Index() {
 
               {/* Les Trésors */}
               <article className="group relative min-h-[640px] overflow-hidden bg-navy">
-                <img src={tresorsImage} alt="Les trésors royaux d'Abomey s'éveillent dans un musée futuriste" className="absolute inset-0 size-full object-cover object-right transition-transform duration-700 group-hover:scale-[1.025]" />
+                <div className="absolute inset-0 grid grid-cols-[1.4fr_0.8fr] gap-1 bg-navy">
+                  <img src={tresorsStatues.url} alt="Trois statues royales historiques exposées au musée" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+                  <img src={tresorsPorte.url} alt="Porte royale sculptée du royaume du Dahomey" className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.025]" />
+                </div>
                 <div className="absolute inset-0 bg-card-overlay" />
                 <div className="absolute inset-x-0 bottom-0 p-7 text-cream md:p-9">
                   <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-sun">Le Bénin que l'on découvre · Aventure · Histoire · Science-fiction</p>
@@ -833,7 +810,7 @@ function Index() {
         <section className="bg-navy py-24 text-cream lg:py-32">
           <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
             <SectionKicker tone="text-sun">Message global</SectionKicker>
-            <h2 className="mt-8 max-w-5xl font-display text-4xl leading-[1.05] md:text-6xl">Nous ne produisons pas seulement des contenus.<br /><em className="text-sun">Nous construisons des façons de regarder.</em></h2>
+            <h2 className="mt-8 max-w-5xl font-display text-4xl leading-[1.05] md:text-6xl">Nous produisons des contenus qui ouvrent le regard.<br /><em className="text-sun">Nous construisons des façons de regarder.</em></h2>
             <div className="mt-12 grid gap-px bg-cream/15 sm:grid-cols-2 lg:grid-cols-3">
               {["Regarder le quotidien", "Comprendre l'histoire", "Découvrir les savoirs", "Explorer les cultures", "Créer de nouveaux imaginaires", "Partager avec le monde"].map((x, i) => (
                 <p key={x} className="bg-blue-glow p-6 font-display text-xl leading-snug md:text-2xl"><span className="mr-3 text-xs font-bold text-sky">0{i + 1}</span>{x}</p>
@@ -857,9 +834,6 @@ function Index() {
                     <p className="mt-2 max-w-xl text-sm leading-relaxed text-navy/70">Une petite équipe. Une grande capacité de création. Transformer une idée en univers, un univers en œuvres et des œuvres en communautés.</p>
                   </div>
                 </div>
-              </div>
-              <div className="flex items-end lg:col-span-3 lg:justify-end">
-                <a href="mailto:sb@afrikafun.com" className="inline-flex items-center gap-3 bg-navy px-6 py-4 font-semibold text-cream transition-transform hover:-translate-y-1">Entrer en conversation <ArrowUpRight size={18} /></a>
               </div>
             </div>
           </div>
